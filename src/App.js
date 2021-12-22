@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import store from "./store";
+import store, { loadMovies, createMovie } from "./store";
 import { connect } from "react-redux";
+import Movies from "./Movies";
+const faker = require("faker");
 // import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
@@ -10,7 +12,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    // store.dispatch(loadLeagues());
+    store.dispatch(loadMovies());
 
     store.subscribe(() => {
       this.setState(store.getState());
@@ -18,44 +20,31 @@ class App extends Component {
   }
 
   render() {
-    return <div></div>;
+    const { createAMovie, clearAll } = this.props;
+    return (
+      <div className="main">
+        <button
+          className="generate-movie-button"
+          onClick={() => createAMovie()}
+        >
+          Generate Random Movie
+        </button>
+        <button>Remove All Movies</button>
+        <Movies />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state) => state;
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     selectATeam: (id) => {
-//       dispatch(selectTeam(id));
-//     },
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createAMovie: () => {
+      const name = faker.random.word();
+      dispatch(createMovie(name));
+    },
+  };
+};
 
-export default connect(mapStateToProps)(App);
-
-//router language below:
-
-// render() {
-//   return (
-//     <Router>
-//       <div>
-//         <h1>Acme Users</h1>
-//         <Route component={Nav} />
-//         <Route component={Users} path="/users" exact />
-//         <Route component={User} path="/users/:id" exact />
-//       </div>
-//     </Router>
-//   );
-// }
-
-// const Nav = ({create, users, location: {pathname}}) => {
-//   return (
-//       <nav>
-//         <Link to='/' className={pathname === '/' ? 'selected' : ''}>Home</Link>
-//         <Link to='/users' className={pathname === '/users' ? 'selected' : ''}>Users ({users.length})</Link>
-//         <button onClick={() => create(faker.name.firstName())}>Create</button>
-//       </nav>
-//   )
-
-// }
+export default connect(mapStateToProps, mapDispatchToProps)(App);

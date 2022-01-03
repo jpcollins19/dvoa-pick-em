@@ -29,7 +29,7 @@ class App extends Component {
         >
           Generate Random Movie
         </button>
-        <button>Remove All Movies</button>
+
         <Movies />
       </div>
     );

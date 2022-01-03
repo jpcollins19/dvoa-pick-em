@@ -37,10 +37,24 @@ app.delete("/api/movies/:id", async (req, res, next) => {
   }
 });
 
+// app.put("/api/movies/:id", async (req, res, next) => {
+//   try {
+//     let movie = await Movie.findByPk(req.params.id);
+//     await movie.update(req.body);
+//     await movie.save();
+//     res.send(movie);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 app.put("/api/movies/:id", async (req, res, next) => {
   try {
     const movie = await Movie.findByPk(req.params.id);
-    await movie.update(req.body);
+
+    await movie.update({ ...req.body });
+
+    await movie.save();
     res.send(movie);
   } catch (err) {
     next(err);

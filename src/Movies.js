@@ -37,10 +37,20 @@ const Movies = ({
             <div className="movie-name-cont">{movie.name}</div>
             <div className="movie-stars-cont">{movie.stars}</div>
             <div className="decrease-star-cont">
-              <button onClick={() => decreaseMovieStars(movie)}>-</button>
+              <button
+                onClick={() => decreaseMovieStars(movie)}
+                disabled={movie.stars === 1}
+              >
+                -
+              </button>
             </div>
             <div className="increase-star-cont">
-              <button onClick={() => increaseMovieStars(movie)}>+</button>
+              <button
+                onClick={() => increaseMovieStars(movie)}
+                disabled={movie.stars === 5}
+              >
+                +
+              </button>
             </div>
           </div>
         ))}

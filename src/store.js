@@ -58,7 +58,8 @@ export const deleteMovie = (movie) => {
 
 export const increaseStars = (movie) => {
   return async (dispatch) => {
-    await axios.put(`/api/movies/${movie.id}`, { movie });
+    const updated = (await axios.put(`/api/movies/${movie.id}`, movie)).data;
+
     dispatch(_increaseStars(movie));
   };
 };

@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.box {
+  height: 100vh;
+  width: calc(100% - 2px);
+  position: absolute;
+}
+
+.pick-teams {
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(238, 50, 3) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  padding-top: 2%;
+  overflow: auto;
+}
+
+.reset-cont {
+  position: absolute;
+  right: 4%;
+}
+
+.full-spread-info-cont {
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  padding: 1rem 4rem 0rem 4rem;
+  /* border: solid 2px blue; */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header > h1 {
+  margin: 1%;
+}
+
+.white-text {
+  margin: 0;
+  text-align: center;
+  text-shadow: 2px 2px black;
+  color: white;
+}
+
+/* .column-cont {
+  border: solid 1px rgb(93, 248, 93);
+} */
+
+.column-cont > h2 {
+  margin: 0 2rem 0 2rem;
+  min-height: 2rem;
+}
+
+.input-options-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: solid 1px yellow; */
+}
+
+.input-options-cont > div {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  /* border: solid 1px pink; */
+}
+
+.spread-cont > input {
+  width: 2rem;
+}
+
+.rank-cont > input {
+  width: 2rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+/* 
+.header-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.header-cont > h2 {
+  margin: 2rem 4rem 1rem 4rem;
+}
+
+.row-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0rem 0.3rem 0rem;
+}
+
+.name-cont {
+  display: flex;
+  flex: 0.2;
+}
+
+.spread-cont {
+  display: flex;
+  flex: 0.4;
+}
+
+.spread-cont > input {
+  width: 2rem;
+}
+
+.locked-cont {
+  display: flex;
+  flex: 0.4;
+}
+
+.locked-cont > input {
+  width: 2rem;
+}
+
+.rank-cont {
+  margin-left: 6rem;
+}
+
+.rank-cont > input {
+  width: 2rem;
+}
+
+
+
+.lastTeam-cont {
+  margin-left: 5rem;
+}
+ */

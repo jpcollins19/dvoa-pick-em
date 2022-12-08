@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { HashRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
-import { loadUsers } from "./store";
+import { loadTeams } from "./store";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUsers());
+    dispatch(loadTeams());
   }, []);
 
   return (

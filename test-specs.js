@@ -1,14 +1,16 @@
 const { expect } = require("chai");
-// const { calcHand } = require("./src/store/funcs");
+const { capFirstLetter } = require("./src/store/funcs");
 
-// describe("sort func, no locking", () => {
-//   let test;
+describe("capFirstLetter func", () => {
+  it("capitalizes the first letter of each word", () => {
+    const team = capFirstLetter("team");
+    const spread = capFirstLetter("spread");
+    const locked = capFirstLetter("locked");
+    const rank = capFirstLetter("rank");
 
-//   beforeEach(() => {
-//     test = ["test1", "test2"];
-//   });
-
-//   it("does something", () => {
-//     expect(ranks[0]).to.equal(3);
-//   });
-// });
+    expect(team).to.equal("Team");
+    expect(spread).to.equal("Spread");
+    expect(locked).to.equal("Locked");
+    expect(rank).to.equal("Rank");
+  });
+});

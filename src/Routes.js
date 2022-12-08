@@ -1,26 +1,12 @@
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
-import { me } from "./store";
-import { useSelector, useDispatch } from "react-redux";
-// import Pre_Login_Page from "./pre_login/Pre_Login_Page";
-import Login_Page from "./components/Login_Page";
-import Home_Page from "./components/Home_Page";
+import Pick_Teams_Page from "./components/Pick_Teams/Pick_Teams_Page";
+import Rank_Page from "./components/Rank/Rank_Page";
 
 const Routes = () => {
-  const dispatch = useDispatch();
-  useEffect(() => dispatch(me()), []);
+  const teams = useSelector((state) => state.teams);
 
-  const auth = useSelector((state) => state.auth);
-
-  return auth.id ? (
-    <Switch>
-      <Route exact path="/home" component={Home_Page} />
-    </Switch>
-  ) : (
-    <Switch>
-      <Route exact path="/" component={Login_Page} />
-    </Switch>
-  );
+  return <Switch>{teams?.length ? <Rank_Page /> : <Pick_Teams_Page />}</Switch>;
 };
 
 export default withRouter(Routes);

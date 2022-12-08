@@ -1,0 +1,12 @@
+.rank-page {
+  background: linear-gradient(
+    to bottom,
+    rgb(8, 10, 10) 0%,
+    #0c0b03 50%,
+    rgb(38, 238, 3) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  padding-top: 2%;
+  overflow: auto;
+}

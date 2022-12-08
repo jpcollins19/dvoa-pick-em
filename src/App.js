@@ -1,50 +1,21 @@
-import React, { Component } from "react";
-import store, { loadMovies, createMovie } from "./store";
-import { connect } from "react-redux";
-import Movies from "./Movies";
-const faker = require("faker");
-// import { HashRouter as Router, Route, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { HashRouter as Router } from "react-router-dom";
+import Routes from "./Routes";
+import { loadUsers } from "./store";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = store.getState();
-  }
+const App = () => {
+  const dispatch = useDispatch();
 
-  async componentDidMount() {
-    store.dispatch(loadMovies());
+  useEffect(() => {
+    dispatch(loadUsers());
+  }, []);
 
-    store.subscribe(() => {
-      this.setState(store.getState());
-    });
-  }
-
-  render() {
-    const { createAMovie, clearAll } = this.props;
-    return (
-      <div className="main">
-        <button
-          className="generate-movie-button"
-          onClick={() => createAMovie()}
-        >
-          Generate Random Movie
-        </button>
-
-        <Movies />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => state;
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createAMovie: () => {
-      const name = faker.random.word();
-      dispatch(createMovie(name));
-    },
-  };
+  return (
+    <Router>
+      <Routes />
+    </Router>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

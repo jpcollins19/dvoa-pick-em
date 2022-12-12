@@ -55,10 +55,6 @@ body {
   color: white;
 }
 
-/* .column-cont {
-  border: solid 1px rgb(93, 248, 93);
-} */
-
 .column-cont > h2 {
   margin: 0 2rem 0 2rem;
   min-height: 2rem;

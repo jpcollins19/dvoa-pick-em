@@ -9,7 +9,7 @@ const Team = db.define("teams", {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
-  name: {
+  team: {
     type: STRING,
   },
   spread: {
@@ -17,6 +17,7 @@ const Team = db.define("teams", {
   },
   rank: {
     type: INTEGER,
+    defaultValue: null,
   },
   locked: {
     type: BOOLEAN,

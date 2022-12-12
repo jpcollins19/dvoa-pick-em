@@ -1,7 +1,7 @@
 import { capFirstLetter } from "../../store";
 import Dropdown from "../Misc/Dropdown";
 
-const Column_Cont = ({ column, idx }) => {
+const Column_Cont = ({ column, onDropdownChange, onChange }) => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   const teams = [
@@ -52,7 +52,7 @@ const Column_Cont = ({ column, idx }) => {
                 placeholder="Select a Team"
                 options={teams}
                 width="12rem"
-                // set={(value) => onChange([idxRank + 1, value.value.name], group)}
+                set={(value) => onDropdownChange(number, value.value)}
               />
             ) : (
               <input
@@ -60,7 +60,7 @@ const Column_Cont = ({ column, idx }) => {
                 type={
                   column === "locked" || column === "lastTeam" ? "checkbox" : ""
                 }
-                // onChange={(ev) => onChange(number, column, ev.target.value)}
+                onChange={(ev) => onChange(number, column, ev.target.value)}
               />
             )}
           </div>

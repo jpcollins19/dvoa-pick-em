@@ -22,7 +22,7 @@ const Dropdown = ({ placeholder, options, width, defaultValue, set }) => {
     placeholder: (styles) => {
       return {
         ...styles,
-        color: "dodgerblue",
+        color: "rgb(245, 93, 245)",
       };
     },
     dropdownIndicator: (styles) => {

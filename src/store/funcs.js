@@ -150,68 +150,64 @@ const capFirstLetter = (str) => {
 //   return newArr;
 // };
 
-// const sameSpreadAudit = (arr) => {
-//   const spreadCountObj = createCountObj(arr, "spread");
+const sameSpreadAudit = (arr) => {
+  const spreadCountObj = createCountObj(arr, "spread");
 
-//   const lockedTeams = arr.filter((team) => team.locked);
+  const lockedTeams = arr.filter((team) => team.locked);
 
-//   const lockedRanks = [];
+  const lockedRanks = [];
 
-//   if (lockedTeams.length)
-//     lockedTeams.forEach((team) => lockedRanks.push(team.rank));
+  // if (lockedTeams.length) {
+  //   lockedTeams.forEach((team) => lockedRanks.push(team.rank));
+  // }
 
-//   let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
-//   let nonDupeSpreadTeams = arr.filter(
-//     (team) => spreadCountObj[team.spread] === 1
-//   );
+  let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
+  let nonDupeSpreadTeams = arr.filter(
+    (team) => spreadCountObj[team.spread] === 1
+  );
 
-//   if (dupeSpreadTeams.length)
-//     dupeSpreadTeams = randomize(dupeSpreadTeams, lockedRanks);
+  // if (dupeSpreadTeams.length) {
+  //   dupeSpreadTeams = randomize(dupeSpreadTeams, lockedRanks);
+  // }
 
-//   return [...dupeSpreadTeams, ...nonDupeSpreadTeams];
-// };
+  return [...dupeSpreadTeams, ...nonDupeSpreadTeams];
+};
 
-// const sort = (arr) => {
-//   let rank = arr.length;
+const sortTeams = (arr) => {
+  let rank = arr.length;
 
-//   const lockedAudit = arr.map((team) => team.locked);
+  const lockedAudit = arr.map((team) => team.locked);
 
-//   if (lockedAudit.includes(true)) {
-//     const numOfTeams = arr.length + 1;
+  if (lockedAudit.includes(true)) {
+    // const numOfTeams = arr.length + 1;
+    // const ranksUsed = [];
+    // const lockedTeams = arr.filter((team) => team.locked);
+    // lockedTeams.forEach((team) => ranksUsed.push(team.rank));
+    // const unLockedTeams = arr
+    //   .filter((team) => !team.locked)
+    //   .sort((a, b) => b.spread - a.spread)
+    //   .map((team) => {
+    //     while (ranksUsed.includes(rank)) rank--;
+    //     ranksUsed.push(rank);
+    //     team.rank = rank;
+    //     rank--;
+    //     return team;
+    //   });
+    // arr = [...lockedTeams, ...unLockedTeams];
+  } else {
+    arr = arr
+      .sort((a, b) => b.spread - a.spread)
+      .map((team) => {
+        team.rank = rank;
+        rank--;
+        return team;
+      });
+  }
 
-//     const ranksUsed = [];
-//     const lockedTeams = arr.filter((team) => team.locked);
+  arr = sameSpreadAudit(arr);
 
-//     lockedTeams.forEach((team) => ranksUsed.push(team.rank));
+  return arr.sort((a, b) => b.rank - a.rank);
+};
 
-//     const unLockedTeams = arr
-//       .filter((team) => !team.locked)
-//       .sort((a, b) => b.spread - a.spread)
-//       .map((team) => {
-//         while (ranksUsed.includes(rank)) rank--;
-
-//         ranksUsed.push(rank);
-//         team.rank = rank;
-//         rank--;
-
-//         return team;
-//       });
-
-//     arr = [...lockedTeams, ...unLockedTeams];
-//   } else {
-//     arr = arr
-//       .sort((a, b) => b.spread - a.spread)
-//       .map((team) => {
-//         team.rank = rank;
-//         rank--;
-//         return team;
-//       });
-//   }
-
-//   arr = sameSpreadAudit(arr);
-
-//   return arr.sort((a, b) => b.rank - a.rank);
-// };
-
-module.exports = { capFirstLetter };
+module.exports = { capFirstLetter, sortTeams };
 //module.exports = { capFirstLetter, sort, setAudit, blankAuditFunc };

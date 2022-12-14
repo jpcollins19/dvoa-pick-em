@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTeams, clearTeams } from "../../store";
+import { loadTeams, clearTeams, sortTeams } from "../../store";
 import Overview_Cont from "./Overview_Cont";
 import Column_Cont_Rank from "./Column_Cont_Rank";
 import Loading from "../Misc/Loading";
@@ -20,15 +20,9 @@ const Rank_Page = () => {
     setLoading(false);
   }, 500);
 
-  let rank = 1;
+  const teams = useSelector((state) => state.teams);
 
-  const teams = useSelector((state) => state.teams).map((team) => {
-    team.rank = rank;
-    rank++;
-    return team;
-  });
-
-  // const rankInfo = sort(teams);
+  const teamsRanked = sortTeams(teams);
 
   const columns = ["rank", "team"];
 
@@ -48,7 +42,7 @@ const Rank_Page = () => {
 
       <div className="rank-info-cont">
         {columns.map((column) => (
-          <Column_Cont_Rank key={column} teams={teams} column={column} />
+          <Column_Cont_Rank key={column} teams={teamsRanked} column={column} />
         ))}
       </div>
     </div>

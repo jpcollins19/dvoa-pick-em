@@ -1,3 +1,8 @@
+const DVOA_Obj = {
+  colts: 1,
+  bills: 2,
+};
+
 const capFirstLetter = (str) => {
   return str
     .split("")
@@ -8,12 +13,12 @@ const capFirstLetter = (str) => {
     .join("");
 };
 
-// const createCountObj = (arr, key) => {
-//   return arr.reduce((a, obj) => {
-//     a[obj[key]] ? a[obj[key]]++ : (a[obj[key]] = 1);
-//     return a;
-//   }, {});
-// };
+const createCountObj = (arr, key) => {
+  return arr.reduce((a, obj) => {
+    a[obj[key]] ? a[obj[key]]++ : (a[obj[key]] = 1);
+    return a;
+  }, {});
+};
 
 // const setAudit = (arr) => {
 //   console.log("arr", arr);
@@ -150,8 +155,175 @@ const capFirstLetter = (str) => {
 //   return newArr;
 // };
 
-const sameSpreadAudit = (arr) => {
+const sortSingleSpread = (arr, lockedRanks, str) => {
+  console.log("sortSingleSpread - arr OG", arr);
+
+  // const lockedAudit = arr.map((team) => team.locked);
+
+  let numOfTeams = arr.length;
+
+  let counter = numOfTeams;
+
+  let highestRank = -1;
+  let lowestRank = 99;
+
+  arr
+    .filter((team) => !team.locked)
+    .forEach((team) => {
+      if (team.rank > highestRank) highestRank = team.rank;
+      if (team.rank < lowestRank) lowestRank = team.rank;
+    });
+
+  console.log("highestRank", highestRank);
+  console.log("lowestRank", lowestRank);
+
+  arr = arr.sort((a, b) => a.dvoaRank - b.dvoaRank);
+
+  console.log("sortSingleSpread - arr after dvoa sort", arr);
+
+  arr.forEach((team) => {
+    team.rank = highestRank;
+    highestRank--;
+  });
+
+  ////////NEED TO FIGURE OUT HOW TO RE-ASSIGN THE NEW RANK BASED ON HIGHEST & LOWESTRANK INFO
+
+  console.log("sortSingleSpread - arr after new rank assignment", arr);
+
+  // const ranksUsed = [];
+
+  // lockedRanks.length && lockedRanks.forEach((rank) => ranksUsed.push(rank));
+
+  // const idxsUsed = [];
+
+  // const randomizedObj = {};
+
+  // let randomRank, randomIdx, lockedTeams, unLockedTeams, currentIdxTeam;
+
+  // if (lockedAudit.includes(true)) {
+  //   lockedTeams = arr.filter((team) => team.locked);
+  //   unLockedTeams = arr.filter((team) => !team.locked);
+
+  //   lockedTeams.forEach((team) => {
+  //     ranksUsed.push(team.rank);
+  //     randomizedObj[team.rank] = team.name;
+  //     counter--;
+  //   });
+
+  //   numOfTeams = unLockedTeams.length;
+  // }
+
+  // if (unLockedTeams !== undefined && unLockedTeams.length === 1) {
+  //   const team = unLockedTeams[0];
+
+  //   randomizedObj[team.rank] = team.name;
+  // } else {
+  //   while (counter > 0) {
+  //     randomRank = Math.ceil(Math.random() * highestRank);
+  //     randomIdx = Math.floor(Math.random() * numOfTeams);
+
+  //     if (
+  //       randomRank >= lowestRank &&
+  //       randomRank <= highestRank &&
+  //       !ranksUsed.includes(randomRank) &&
+  //       !idxsUsed.includes(randomIdx)
+  //     ) {
+  //       currentIdxTeam = lockedAudit.includes(true)
+  //         ? unLockedTeams[randomIdx].name
+  //         : arr[randomIdx].name;
+
+  //       randomizedObj[randomRank] = currentIdxTeam;
+  //       ranksUsed.push(randomRank);
+  //       idxsUsed.push(randomIdx);
+  //       counter--;
+  //     }
+  //   }
+  // }
+
+  // arr = Object.entries(randomizedObj).map((entry) => {
+  //   team = arr.find((team) => team.name === entry[1]);
+  //   team.rank = Number(entry[0]);
+  //   return team;
+  // });
+
+  return arr;
+};
+
+const DVOA_Obj_TESTING = {
+  eagles: 1,
+  bills: 2,
+  "9ers": 3,
+  boys: 4,
+  ravens: 5,
+  bengals: 6,
+  chiefs: 7,
+  fins: 8,
+  jets: 9,
+  hawks: 10,
+  lions: 11,
+  pats: 12,
+  bucs: 13,
+  browns: 14,
+  pack: 15,
+  falcons: 16,
+  wash: 17,
+  jags: 18,
+  steelers: 19,
+  titans: 20,
+  vikings: 21,
+  saints: 22,
+  broncos: 23,
+  giants: 24,
+  raiders: 25,
+  chargers: 26,
+  rams: 27,
+  panthers: 28,
+  bears: 29,
+  cards: 30,
+  colts: 31,
+  texans: 32,
+};
+
+const rankDVOA = (arr, lockedRanks, str) => {
+  arr = arr.map((obj) => {
+    obj.dvoaRank = str.length
+      ? DVOA_Obj_TESTING[obj.team]
+      : (obj.dvoaRank = DVOA_Obj[obj.team]);
+
+    return obj;
+  });
+
+  console.log("rankDVOA - arr", arr);
+
+  const sameSpreadAuditObj = arr.reduce((a, team) => {
+    !a[team.spread] ? (a[team.spread] = [team]) : a[team.spread].push(team);
+
+    return a;
+  }, {});
+
+  console.log("sameSpreadAuditObj", sameSpreadAuditObj);
+
+  console.log("sameSpreadAuditObj - keys", Object.keys(sameSpreadAuditObj));
+
+  let newArr = [];
+
+  Object.keys(sameSpreadAuditObj).forEach((number) => {
+    const newOrder = sortSingleSpread(
+      sameSpreadAuditObj[number],
+      lockedRanks,
+      str
+    );
+
+    newArr = [...newArr, ...newOrder];
+  });
+
+  return newArr;
+};
+
+const sameSpreadAudit = (arr, str) => {
   const spreadCountObj = createCountObj(arr, "spread");
+
+  // console.log("spreadCountObj", spreadCountObj);
 
   const lockedTeams = arr.filter((team) => team.locked);
 
@@ -162,18 +334,23 @@ const sameSpreadAudit = (arr) => {
   // }
 
   let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
+
+  console.log("dupeSpreadTeams", dupeSpreadTeams);
+
   let nonDupeSpreadTeams = arr.filter(
     (team) => spreadCountObj[team.spread] === 1
   );
 
-  // if (dupeSpreadTeams.length) {
-  //   dupeSpreadTeams = randomize(dupeSpreadTeams, lockedRanks);
-  // }
+  console.log("nonDupeSpreadTeams", nonDupeSpreadTeams);
+
+  if (dupeSpreadTeams.length) {
+    dupeSpreadTeams = rankDVOA(dupeSpreadTeams, lockedRanks, str);
+  }
 
   return [...dupeSpreadTeams, ...nonDupeSpreadTeams];
 };
 
-const sortTeams = (arr) => {
+const sortTeams = (arr, str = "") => {
   let rank = arr.length;
 
   const lockedAudit = arr.map((team) => team.locked);
@@ -204,7 +381,7 @@ const sortTeams = (arr) => {
       });
   }
 
-  arr = sameSpreadAudit(arr);
+  arr = sameSpreadAudit(arr, str);
 
   return arr.sort((a, b) => b.rank - a.rank);
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addTeam } from "../../store";
 import Loading from "../Misc/Loading";
 import Button from "../Misc/Button";
 import Column_Cont from "./Column_Cont";
@@ -48,16 +49,17 @@ const Pick_Teams_Page = () => {
 
   const onSubmit = async (evt) => {
     evt.preventDefault();
-    // evt.target.reset();
 
     try {
-      // const teams = Object.values(setObj);
-      // for (let i = 0; i < teams.length; i++) {
-      //   const lastTeam = teams[i].lastTeam;
-      //   dispatch(addTeam(teams[i]));
-      //   if (lastTeam) break;
-      // }
-      // evt.target.reset();
+      const teams = Object.values(setObj);
+
+      for (let i = 0; i < teams.length; i++) {
+        const lastTeam = teams[i].lastTeam;
+        dispatch(addTeam(teams[i]));
+        if (lastTeam) break;
+      }
+
+      evt.target.reset();
     } catch (err) {
       console.log(err);
     }

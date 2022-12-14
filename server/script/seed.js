@@ -15,11 +15,11 @@ let teams = [
   { team: "saints", spread: 4.5 },
   { team: "bills", spread: 16.5 },
   { team: "pats", spread: 6 },
-  { team: "bucs", spread: 9 },
+  { team: "bucs", spread: 9.5 },
   { team: "cards", spread: 5.5 },
   { team: "rams", spread: 7.5 },
   { team: "chargers", spread: 1 },
-  { team: "lions", spread: 18 },
+  { team: "9ers", spread: 18 },
 ];
 
 /////////////15 games/////////////

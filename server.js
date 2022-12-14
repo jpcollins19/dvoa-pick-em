@@ -1,8 +1,3 @@
-//////////////////////////////////////////code work/////////////////////////////////////////////
-
-////Pick_Teams Page
-//add logic to create teams on submit - audit after
-
 ////adjust sortTeams func - write test specs first - see DVOA notes below when you get to dupe spread scenarios
 
 ////add DVOA as tiebreaker - footballInsiders is a good source to find out a team's DVOA
@@ -10,8 +5,6 @@
 //then need to write code for ordering the tied teams based on DVOA info
 //create a func that takes in the data from the football insiders site, and translates the teams to joe verbiage (fins, pack, etc) with their DVOA rank
 //write code from there for when there are ties in spreads - use old code
-
-//////////////////////////////////////////code work/////////////////////////////////////////////
 
 //roll through every file and delete everything that is commented out
 

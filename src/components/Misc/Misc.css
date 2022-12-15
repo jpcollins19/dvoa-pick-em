@@ -36,14 +36,6 @@
 }
 
 .dropdown {
-  /* background: linear-gradient(
-    to bottom,
-    rgb(159, 159, 147) 0%,
-    rgb(222, 222, 212) 25%,
-    rgb(203, 203, 192) 50%,
-    rgb(222, 222, 212) 75%,
-    rgb(159, 159, 147) 100%
-  ); */
   background: white;
   border-radius: 0.5rem;
 }

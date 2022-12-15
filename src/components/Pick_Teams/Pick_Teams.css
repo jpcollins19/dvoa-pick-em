@@ -33,9 +33,7 @@ body {
 .full-spread-info-cont {
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
   padding: 1rem 4rem 0rem 4rem;
-  /* border: solid 2px blue; */
 }
 
 .header {
@@ -64,14 +62,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: solid 1px yellow; */
 }
 
 .input-options-cont > div {
   display: flex;
   align-items: center;
   min-height: 3rem;
-  /* border: solid 1px pink; */
 }
 
 .spread-cont > input {
@@ -89,58 +85,3 @@ body {
 .bold {
   font-weight: bolder;
 }
-
-/* 
-.header-cont {
-  display: flex;
-  justify-content: center;
-}
-
-.header-cont > h2 {
-  margin: 2rem 4rem 1rem 4rem;
-}
-
-.row-cont {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem 0rem 0.3rem 0rem;
-}
-
-.name-cont {
-  display: flex;
-  flex: 0.2;
-}
-
-.spread-cont {
-  display: flex;
-  flex: 0.4;
-}
-
-.spread-cont > input {
-  width: 2rem;
-}
-
-.locked-cont {
-  display: flex;
-  flex: 0.4;
-}
-
-.locked-cont > input {
-  width: 2rem;
-}
-
-.rank-cont {
-  margin-left: 6rem;
-}
-
-.rank-cont > input {
-  width: 2rem;
-}
-
-
-
-.lastTeam-cont {
-  margin-left: 5rem;
-}
- */

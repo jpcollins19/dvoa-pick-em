@@ -8,6 +8,10 @@
 
 //roll through every file and delete everything that is commented out
 
+//in git and on local comp - adjust title of old file to be OLD - do a test push to verify they are still connected
+
+//in git and on local comp - adjust title of this file to be just 'pick_em' - do a test push to verify they are still connected
+
 const express = require("express");
 const app = express();
 const syncAndSeed = require("./server/script/seed");
@@ -16,9 +20,6 @@ const path = require("path");
 app.use(express.json());
 
 app.use("/dist", express.static(path.join(__dirname, "dist")));
-
-// app.use("/public/css", express.static(path.join(__dirname, "public/css")));
-// app.use("/public/pics", express.static(path.join(__dirname, "public/pics")));
 
 app.use("/", require("./server/api/teams.js"));
 

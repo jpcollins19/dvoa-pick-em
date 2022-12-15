@@ -13,5 +13,3 @@ const db = new Sequelize(
 );
 
 module.exports = db;
-
-//npm i jsonwebtoken bcrypt dotenv

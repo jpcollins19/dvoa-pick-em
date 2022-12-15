@@ -40,18 +40,18 @@ let teams = [
 /////////////chiefs = locked/////////////
 
 const syncAndSeed = async () => {
-  await db.sync({ force: true });
+  // await db.sync({ force: true });
   /////////////////////////////////////////////////////////////
-  await Promise.all(
-    teams.map((team) =>
-      Team.create({
-        team: team.team,
-        spread: team.spread,
-        locked: team.locked,
-        rank: team.rank,
-      })
-    )
-  );
+  // await Promise.all(
+  //   teams.map((team) =>
+  //     Team.create({
+  //       team: team.team,
+  //       spread: team.spread,
+  //       locked: team.locked,
+  //       rank: team.rank,
+  //     })
+  //   )
+  // );
 };
 
 module.exports = syncAndSeed;

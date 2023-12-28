@@ -1,38 +1,3 @@
-const DVOA_Obj = {
-  boys: 1,
-  bills: 2,
-  chiefs: 3,
-  jets: 4,
-  "9ers": 5,
-  eagles: 6,
-  browns: 7,
-  ravens: 8,
-  bengals: 9,
-  chargers: 10,
-  steelers: 11,
-  lions: 12,
-  fins: 13,
-  falcons: 14,
-  jags: 15,
-  saints: 16,
-  raiders: 17,
-  pats: 18,
-  pack: 19,
-  hawks: 20,
-  wash: 21,
-  broncos: 22,
-  giants: 23,
-  titans: 24,
-  bucs: 25,
-  vikings: 26,
-  rams: 27,
-  panthers: 28,
-  colts: 29,
-  bears: 30,
-  texans: 31,
-  cards: 32,
-};
-
 const capFirstLetter = (str) => {
   return str
     .split("")
@@ -50,27 +15,28 @@ const createCountObj = (arr, key) => {
   }, {});
 };
 
-const sortSingleSpread = (arr, lockedRanks, str) => {
+const sortSingleSpread = (teamArray, lockedRanks) => {
   let highestRank = -1;
 
-  arr
+  teamArray
     .filter((team) => !team.locked)
     .forEach((team) => {
       if (team.rank > highestRank) highestRank = team.rank;
     });
 
-  arr = arr.sort((a, b) => a.dvoaRank - b.dvoaRank);
+  teamArray.sort((a, b) => a.dvoaRank - b.dvoaRank);
 
-  arr
+  teamArray
     .filter((team) => !team.locked)
     .forEach((team) => {
-      while (lockedRanks.includes(highestRank)) highestRank--;
+      while (lockedRanks.includes(highestRank)) {
+        highestRank--;
+      }
 
-      team.rank = highestRank;
-      highestRank--;
+      team.rank = highestRank--;
     });
 
-  return arr;
+  return teamArray;
 };
 
 const DVOA_Obj_TESTING = {
@@ -108,14 +74,14 @@ const DVOA_Obj_TESTING = {
   texans: 32,
 };
 
-const rankDVOA = (arr, lockedRanks, str) => {
-  arr = arr.map((obj) => {
-    obj.dvoaRank = str.length ? DVOA_Obj_TESTING[obj.team] : DVOA_Obj[obj.team];
+const rankDVOA = (teamArray, lockedRanks, DVOA_Rank) => {
+  teamArray.forEach((obj) => {
+    obj.dvoaRank = DVOA_Rank[obj.team];
 
     return obj;
   });
 
-  const sameSpreadAuditObj = arr.reduce((a, team) => {
+  const sameSpreadAuditObj = teamArray.reduce((a, team) => {
     !a[team.spread] ? (a[team.spread] = [team]) : a[team.spread].push(team);
 
     return a;
@@ -124,11 +90,7 @@ const rankDVOA = (arr, lockedRanks, str) => {
   let newArr = [];
 
   Object.keys(sameSpreadAuditObj).forEach((number) => {
-    const newOrder = sortSingleSpread(
-      sameSpreadAuditObj[number],
-      lockedRanks,
-      str
-    );
+    const newOrder = sortSingleSpread(sameSpreadAuditObj[number], lockedRanks);
 
     newArr = [...newArr, ...newOrder];
   });
@@ -136,227 +98,63 @@ const rankDVOA = (arr, lockedRanks, str) => {
   return newArr;
 };
 
-const sameSpreadAudit = (arr, str) => {
-  const spreadCountObj = createCountObj(arr, "spread");
-
-  const lockedTeams = arr.filter((team) => team.locked);
+const sameSpreadAudit = (teamArray, DVOA_Rank) => {
+  const spreadCountObj = createCountObj(teamArray, "spread");
 
   const lockedRanks = [];
 
-  if (lockedTeams.length)
-    lockedTeams.forEach((team) => lockedRanks.push(team.rank));
+  teamArray
+    .filter((team) => team.locked)
+    .forEach((team) => lockedRanks.push(team.rank));
 
-  let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
+  let dupeSpreadTeams = teamArray.filter(
+    (team) => spreadCountObj[team.spread] > 1
+  );
 
-  let nonDupeSpreadTeams = arr.filter(
+  let nonDupeSpreadTeams = teamArray.filter(
     (team) => spreadCountObj[team.spread] === 1
   );
 
-  if (dupeSpreadTeams.length) {
-    dupeSpreadTeams = rankDVOA(dupeSpreadTeams, lockedRanks, str);
-  }
+  dupeSpreadTeams = rankDVOA(dupeSpreadTeams, lockedRanks, DVOA_Rank);
 
   return [...dupeSpreadTeams, ...nonDupeSpreadTeams];
 };
 
-const sortTeams = (arr, str = "") => {
-  let rank = arr.length;
+const sortTeams = (teamArray, DVOA_Rank) => {
+  let rank = teamArray.length;
 
-  const lockedAudit = arr.map((team) => team.locked);
+  const lockedTeams = teamArray.filter((team) => team.locked);
 
-  if (lockedAudit.includes(true)) {
+  if (lockedTeams.length) {
     const ranksUsed = [];
-
-    const lockedTeams = arr.filter((team) => team.locked);
 
     lockedTeams.forEach((team) => ranksUsed.push(team.rank));
 
-    const unLockedTeams = arr
+    const unLockedTeams = teamArray
       .filter((team) => !team.locked)
       .sort((a, b) => b.spread - a.spread)
       .map((team) => {
         while (ranksUsed.includes(rank)) rank--;
 
         ranksUsed.push(rank);
-        team.rank = rank;
-        rank--;
+        team.rank = rank--;
+
         return team;
       });
 
-    arr = [...lockedTeams, ...unLockedTeams];
+    teamArray = [...lockedTeams, ...unLockedTeams];
   } else {
-    arr = arr
+    teamArray
       .sort((a, b) => b.spread - a.spread)
       .map((team) => {
-        team.rank = rank;
-        rank--;
+        team.rank = rank--;
         return team;
       });
   }
 
-  arr = sameSpreadAudit(arr, str);
+  teamArray = sameSpreadAudit(teamArray, DVOA_Rank);
 
-  return arr.sort((a, b) => b.rank - a.rank);
+  return teamArray.sort((a, b) => b.rank - a.rank);
 };
-
-// const randomizeSingleSpread = (arr, lockedRanks) => {
-//   const lockedAudit = arr.map((team) => team.locked);
-
-//   let numOfTeams = arr.length;
-
-//   let counter = numOfTeams;
-
-//   let highestRank = -1;
-//   let lowestRank = 99;
-
-//   arr
-//     .filter((team) => !team.locked)
-//     .forEach((team) => {
-//       if (team.rank > highestRank) highestRank = team.rank;
-//       if (team.rank < lowestRank) lowestRank = team.rank;
-//     });
-
-//   const ranksUsed = [];
-
-//   lockedRanks.length && lockedRanks.forEach((rank) => ranksUsed.push(rank));
-
-//   const idxsUsed = [];
-
-//   const randomizedObj = {};
-
-//   let randomRank, randomIdx, lockedTeams, unLockedTeams, currentIdxTeam;
-
-//   if (lockedAudit.includes(true)) {
-//     lockedTeams = arr.filter((team) => team.locked);
-//     unLockedTeams = arr.filter((team) => !team.locked);
-
-//     lockedTeams.forEach((team) => {
-//       ranksUsed.push(team.rank);
-//       randomizedObj[team.rank] = team.team;
-//       counter--;
-//     });
-
-//     numOfTeams = unLockedTeams.length;
-//   }
-
-//   if (unLockedTeams !== undefined && unLockedTeams.length === 1) {
-//     const team = unLockedTeams[0];
-
-//     randomizedObj[team.rank] = team.team;
-//   } else {
-//     while (counter > 0) {
-//       randomRank = Math.ceil(Math.random() * highestRank);
-//       randomIdx = Math.floor(Math.random() * numOfTeams);
-
-//       if (
-//         randomRank >= lowestRank &&
-//         randomRank <= highestRank &&
-//         !ranksUsed.includes(randomRank) &&
-//         !idxsUsed.includes(randomIdx)
-//       ) {
-//         currentIdxTeam = lockedAudit.includes(true)
-//           ? unLockedTeams[randomIdx].name
-//           : arr[randomIdx].name;
-
-//         randomizedObj[randomRank] = currentIdxTeam;
-//         ranksUsed.push(randomRank);
-//         idxsUsed.push(randomIdx);
-//         counter--;
-//       }
-//     }
-//   }
-
-//   arr = Object.entries(randomizedObj).map((entry) => {
-//     team = arr.find((team) => team.team === entry[1]);
-//     team.rank = Number(entry[0]);
-//     return team;
-//   });
-
-//   return arr;
-// };
-
-// const randomize = (arr, lockedRanks) => {
-//   const sameSpreadAuditObj = arr.reduce((a, team) => {
-//     !a[team.spread] ? (a[team.spread] = [team]) : a[team.spread].push(team);
-
-//     return a;
-//   }, {});
-
-//   let newArr = [];
-
-//   Object.keys(sameSpreadAuditObj).forEach((number) => {
-//     const newOrder = randomizeSingleSpread(
-//       sameSpreadAuditObj[number],
-//       lockedRanks
-//     );
-
-//     newArr = [...newArr, ...newOrder];
-//   });
-
-//   return newArr;
-// };
-
-// const sameSpreadAuditOG = (arr) => {
-//   const spreadCountObj = createCountObj(arr, "spread");
-
-//   const lockedTeams = arr.filter((team) => team.locked);
-
-//   const lockedRanks = [];
-
-//   if (lockedTeams.length)
-//     lockedTeams.forEach((team) => lockedRanks.push(team.rank));
-
-//   let dupeSpreadTeams = arr.filter((team) => spreadCountObj[team.spread] > 1);
-//   let nonDupeSpreadTeams = arr.filter(
-//     (team) => spreadCountObj[team.spread] === 1
-//   );
-
-//   if (dupeSpreadTeams.length)
-//     dupeSpreadTeams = randomize(dupeSpreadTeams, lockedRanks);
-
-//   return [...dupeSpreadTeams, ...nonDupeSpreadTeams];
-// };
-
-// const sortOG = (arr) => {
-//   let rank = arr.length;
-
-//   const lockedAudit = arr.map((team) => team.locked);
-
-//   if (lockedAudit.includes(true)) {
-//     const numOfTeams = arr.length + 1;
-
-//     const ranksUsed = [];
-//     const lockedTeams = arr.filter((team) => team.locked);
-
-//     lockedTeams.forEach((team) => ranksUsed.push(team.rank));
-
-//     const unLockedTeams = arr
-//       .filter((team) => !team.locked)
-//       .sort((a, b) => b.spread - a.spread)
-//       .map((team) => {
-//         while (ranksUsed.includes(rank)) rank--;
-
-//         ranksUsed.push(rank);
-//         team.rank = rank;
-//         rank--;
-
-//         return team;
-//       });
-
-//     arr = [...lockedTeams, ...unLockedTeams];
-//   } else {
-//     arr = arr
-//       .sort((a, b) => b.spread - a.spread)
-//       .map((team) => {
-//         team.rank = rank;
-//         rank--;
-//         return team;
-//       });
-//   }
-
-//   arr = sameSpreadAuditOG(arr);
-
-//   return arr.sort((a, b) => b.rank - a.rank);
-// };
 
 module.exports = { capFirstLetter, sortTeams };

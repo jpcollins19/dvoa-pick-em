@@ -1,6 +1,6 @@
 const {
   db,
-  models: { Team },
+  models: { Team, Excel_Ranking },
 } = require("../db/index.js");
 
 let teams = [
@@ -22,6 +22,18 @@ let teams = [
   { team: "9ers", spread: 18 },
 ];
 
+const XLSX = require("xlsx");
+
+const excelDoc = XLSX.readFile("./excel_docs/DVOA Conversion.xlsx").Sheets[
+  "DVOA_Data"
+];
+
+const teamRankInfo = XLSX.utils.sheet_to_json(excelDoc);
+
+// const DVOA_Obj = {};
+
+// OG_Data.forEach((teamData) => (DVOA_Obj[teamData.team] = teamData.rank));
+
 /////////////15 games/////////////
 //teams = teams.filter((team) => team.team !== "titans");
 /////////////15 games/////////////
@@ -40,18 +52,16 @@ let teams = [
 /////////////chiefs = locked/////////////
 
 const syncAndSeed = async () => {
-  // await db.sync({ force: true });
+  await db.sync({ force: true });
   /////////////////////////////////////////////////////////////
-  // await Promise.all(
-  //   teams.map((team) =>
-  //     Team.create({
-  //       team: team.team,
-  //       spread: team.spread,
-  //       locked: team.locked,
-  //       rank: team.rank,
-  //     })
-  //   )
-  // );
+  await Promise.all(
+    teamRankInfo.map((team) =>
+      Excel_Ranking.create({
+        team: team.name,
+        rank: team.rank,
+      })
+    )
+  );
 };
 
 module.exports = syncAndSeed;

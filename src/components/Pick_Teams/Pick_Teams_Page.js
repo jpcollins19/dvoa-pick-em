@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTeam } from "../../store";
+import { addTeam, numbers, pickTeamsColumns, DVOA_Obj } from "../../store";
 import Loading from "../Misc/Loading";
 import Button from "../Misc/Button";
 import Column_Cont from "./Column_Cont";
@@ -15,8 +15,6 @@ const Pick_Teams_Page = () => {
     setLoading(false);
   }, 500);
 
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-
   const setObj = numbers.reduce((a, number) => {
     const team = {
       team: null,
@@ -27,8 +25,6 @@ const Pick_Teams_Page = () => {
 
     return a;
   }, {});
-
-  const columns = ["lastTeam", "team", "spread", "locked", "rank"];
 
   const onDropdownChange = (objIdx, teamName) => {
     setObj[objIdx].team = teamName;
@@ -84,7 +80,7 @@ const Pick_Teams_Page = () => {
       <Button text="Submit" form="submit" />
 
       <div className="full-spread-info-cont">
-        {columns.map((column, idx) => (
+        {pickTeamsColumns.map((column, idx) => (
           <Column_Cont
             key={idx}
             column={column}

@@ -7,6 +7,7 @@ app.use(express.json());
 
 app.use("/dist", express.static(path.join(__dirname, "dist")));
 app.use("/", require("./server/api/teams.js"));
+app.use("/", require("./server/api/excel_ranking.js"));
 app.use("/", (req, res, next) =>
   res.sendFile(path.join(__dirname, "html/main.html"))
 );

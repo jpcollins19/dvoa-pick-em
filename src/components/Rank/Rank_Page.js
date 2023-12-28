@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTeams, clearTeams, sortTeams } from "../../store";
+import {
+  loadTeams,
+  clearTeams,
+  sortTeams,
+  rankColumns,
+  loadExcelRankings,
+} from "../../store";
 import Overview_Cont from "./Overview_Cont";
 import Column_Cont_Rank from "./Column_Cont_Rank";
 import Loading from "../Misc/Loading";
@@ -14,6 +20,7 @@ const Rank_Page = () => {
 
   useEffect(() => {
     dispatch(loadTeams());
+    dispatch(loadExcelRankings());
   }, []);
 
   setTimeout(() => {
@@ -21,10 +28,15 @@ const Rank_Page = () => {
   }, 500);
 
   const teams = useSelector((state) => state.teams);
+  const excel_rankings = useSelector((state) => state.excelRankings);
 
-  const teamsRanked = sortTeams(teams);
+  const DVOA_Rank = {};
 
-  const columns = ["rank", "team"];
+  excel_rankings.forEach(
+    (teamData) => (DVOA_Rank[teamData.team] = teamData.rank)
+  );
+
+  const teamsRanked = sortTeams(teams, DVOA_Rank);
 
   return loading ? (
     <Loading />
@@ -41,7 +53,7 @@ const Rank_Page = () => {
       <Overview_Cont teams={teams} />
 
       <div className="rank-info-cont">
-        {columns.map((column) => (
+        {rankColumns.map((column) => (
           <Column_Cont_Rank key={column} teams={teamsRanked} column={column} />
         ))}
       </div>

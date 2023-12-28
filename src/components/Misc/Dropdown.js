@@ -81,7 +81,7 @@ const Dropdown = ({ placeholder, options, width, defaultValue, set }) => {
         menuPosition="fixed"
         options={options && options}
         placeholder={placeholder ? placeholder : ""}
-        defaultValue={defaultValue ? defaultValue : ""}
+        defaultValue={defaultValue}
         onChange={set && set}
         styles={styles}
         isSearchable={true}

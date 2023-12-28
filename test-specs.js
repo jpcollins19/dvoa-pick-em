@@ -1,6 +1,41 @@
 const { expect } = require("chai");
 const { capFirstLetter, sortTeams } = require("./src/store/funcs");
 
+const DVOA_Obj_TESTING = {
+  eagles: 1,
+  bills: 2,
+  "9ers": 3,
+  boys: 4,
+  ravens: 5,
+  bengals: 6,
+  chiefs: 7,
+  fins: 8,
+  jets: 9,
+  hawks: 10,
+  lions: 11,
+  pats: 12,
+  bucs: 13,
+  browns: 14,
+  pack: 15,
+  falcons: 16,
+  wash: 17,
+  jags: 18,
+  steelers: 19,
+  titans: 20,
+  vikings: 21,
+  saints: 22,
+  broncos: 23,
+  giants: 24,
+  raiders: 25,
+  chargers: 26,
+  rams: 27,
+  panthers: 28,
+  bears: 29,
+  cards: 30,
+  colts: 31,
+  texans: 32,
+};
+
 describe("capFirstLetter func", () => {
   it("capitalizes the first letter of each word", () => {
     const team = capFirstLetter("team");
@@ -59,7 +94,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -94,7 +129,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -136,7 +171,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -189,7 +224,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -237,7 +272,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -272,7 +307,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -314,7 +349,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -357,7 +392,7 @@ describe("sortTeams func", () => {
           return team;
         });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         teams2Audit = ["colts", "pack", "titans", "wash"];
 
@@ -410,9 +445,7 @@ describe("sortTeams func", () => {
         { team: "pack", spread: "7", rank: null, locked: false }, //13
       ];
 
-      answer = sortTeams(teams, "test");
-
-      console.log("answer", answer);
+      answer = sortTeams(teams, DVOA_Obj_TESTING);
 
       lockedAudit = answer.map((user) => user.locked);
 
@@ -487,7 +520,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -530,7 +563,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -578,7 +611,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -627,7 +660,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -676,7 +709,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -729,7 +762,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -790,7 +823,7 @@ describe("sortTeams func", () => {
           return team;
         });
 
-        answer = sortTeams(teams, "test");
+        answer = sortTeams(teams, DVOA_Obj_TESTING);
 
         lockedAudit = answer.map((user) => user.locked);
 
@@ -858,7 +891,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -887,7 +920,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -916,7 +949,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -945,7 +978,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -974,7 +1007,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1017,7 +1050,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1052,7 +1085,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1087,7 +1120,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1122,7 +1155,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1157,7 +1190,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1220,7 +1253,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1274,7 +1307,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1336,7 +1369,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1398,7 +1431,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1452,7 +1485,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1506,7 +1539,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1568,7 +1601,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1630,7 +1663,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1692,7 +1725,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1753,7 +1786,7 @@ describe("sortTeams func", () => {
             if (team.team === "rams") team.spread = "3"; //4
             return team;
           });
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1803,7 +1836,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1853,7 +1886,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1903,7 +1936,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1953,7 +1986,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -1992,7 +2025,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2042,7 +2075,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2092,7 +2125,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2142,7 +2175,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2200,7 +2233,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2258,7 +2291,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2316,7 +2349,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2374,7 +2407,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2436,7 +2469,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2498,7 +2531,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2560,7 +2593,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2622,7 +2655,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           // teams2Audit = ["titans", "wash", "pack", "chargers"];
           lockedAudit = answer.map((user) => user.locked);
@@ -2685,7 +2718,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2747,7 +2780,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2805,7 +2838,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, (str = DVOA_Obj_TESTING));
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2873,7 +2906,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -2941,7 +2974,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -3009,7 +3042,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -3085,7 +3118,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -3161,7 +3194,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -3237,7 +3270,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
@@ -3313,7 +3346,7 @@ describe("sortTeams func", () => {
             return team;
           });
 
-          answer = sortTeams(teams, "test");
+          answer = sortTeams(teams, DVOA_Obj_TESTING);
 
           lockedAudit = answer.map((user) => user.locked);
 
